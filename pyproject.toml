@@ -19,6 +19,10 @@ classifiers = [
 keywords = ["markdown", "parser", "extraction", "headers"]
 license = {file = "LICENSE"}
 
+[project.urls]
+"Homepage" = "https://github.com/cogitoergo-sum/markdown_extract"
+"Bug Tracker" = "https://github.com/cogitoergo-sum/markdown_extract/issues"
+
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["markdown_extract*"]
