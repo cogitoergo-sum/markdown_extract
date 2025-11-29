@@ -1,7 +1,7 @@
 # Markdown Extract
 
 A Simple Python library to parse Markdown files from headers.
-
+[![PyPI Latest Release](https://img.shields.io/pypi/v/markdown-extract.svg)](https://pypi.org/project/markdown-extract/) 
 ## Installation
 
 Clone the repository and install the package (or just use the `markdown_extract` folder).
