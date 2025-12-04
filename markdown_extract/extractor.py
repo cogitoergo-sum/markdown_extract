@@ -20,6 +20,12 @@ class Section:
 
     def __repr__(self):
         return self.__str__()
+        
+    def list(self) -> list:
+        """
+        Returns a list of child header names.
+        """
+        return [k for k in self._data.keys() if k not in ["__content__", "__header_line__"]]
 
     def _reconstruct_node(self, node, is_root=False) -> str:
         output = []
@@ -45,6 +51,12 @@ class MarkdownExtractor:
     """
     def __init__(self, file_content: str):
         self.data = parse_markdown(file_content)
+
+    def list(self) -> list:
+        """
+        Returns a list of top-level header names.
+        """
+        return Section(self.data).list()
 
     def get_section(self, *headers) -> str:
         """

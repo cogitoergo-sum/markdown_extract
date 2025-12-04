@@ -1,10 +1,16 @@
 # Markdown Extract
 
 A Simple Python library to parse Markdown files from headers.
-[![PyPI Latest Release](https://img.shields.io/pypi/v/markdown-extract.svg)](https://pypi.org/project/markdown-extract/) 
+
+[![PyPI Latest Release](https://img.shields.io/pypi/v/markdown-extract.svg)](https://pypi.org/project/markdown-extract/)
+
 ## Installation
 
-Clone the repository and install the package (or just use the `markdown_extract` folder).
+Install via pip:
+
+```bash
+pip install markdown-extract
+```
 
 ## Usage
 
@@ -21,26 +27,46 @@ More details.
 
 extractor = MarkdownExtractor(markdown_content)
 
-# Get all content under "Section 1" (including subsections)
-section_1 = extractor.get_section("Section 1")
-print(section_1)
+# 1. Access sections using dictionary-style brackets
+print(extractor["Section 1"])
+# Output:
+# # Section 1
+# Some content here.
+# ...
 
-# Get content specifically under "Subsection 1.1"
-subsection = extractor.get_section("Section 1", "Subsection 1.1")
-print(subsection)
+# 2. Access nested sections
+print(extractor["Section 1"]["Subsection 1.1"])
+# Output:
+# ## Subsection 1.1
+# More details.
 
-# You can also use bracket syntax to access sections
-# This returns a Section object, which can be converted to string
-section_1_bracket = extractor["Section 1"]
-print(section_1_bracket)
+# 3. List child headers
+print(extractor.list())
+# Output: ['Section 1']
 
-# Chain brackets to access nested sections
-subsection_bracket = extractor["Section 1"]["Subsection 1.1"]
-print(subsection_bracket)
+print(extractor["Section 1"].list())
+# Output: ['Subsection 1.1']
+
+# 4. Access the full document (root)
+print(extractor[""])
 ```
 
 ## Features
 
-- Parses nested Markdown headers.
-- Retrieves raw content for any specific section hierarchy.
-- Preserves structure when retrieving higher-level sections.
+- **Nested Parsing**: Correctly parses Markdown headers into a nested structure.
+- **Robust Extraction**: Ignores "headers" that are actually inside:
+    - Code blocks (` ``` `)
+    - Tables
+    - Math blocks (`$$`)
+    - YAML front matter (`---`)
+- **Indentation Support**: Handles indented headers correctly.
+- **Easy Access**: Use bracket notation (`extractor["Header"]`) or `.get_section()` method.
+- **Discovery**: Use `.list()` to see available child headers at any level.
+
+## Development
+
+To run the tests:
+
+```bash
+python tests/run_tests.py
+```
